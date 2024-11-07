@@ -6,9 +6,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'akaSearch',
-  tagline: 'Search for aka.ms links!',
-  url: 'https://akaSearch.net',
+  title: 'Bluesky.ms',
+  tagline: 'Search the Microsoft community on Bluesky!',
+  url: 'https://bluesky.ms',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -17,7 +17,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'merill', // Usually your GitHub org/user name.
-  projectName: 'aka', // Usually your repo name.
+  projectName: 'bluesky', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -38,7 +38,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/merill/aka/tree/main/website',
+            'https://github.com/merill/bluesky/tree/main/website',
         },
         blog: false,
         theme: {
@@ -52,9 +52,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'akaSearch',
+        title: 'Bluesky.ms',
         logo: {
-          alt: 'akaSearch Logo',
+          alt: 'Bluesky Logo',
           src: 'img/logo.png',
         },
         items: [
@@ -72,7 +72,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/merill/aka',
+            href: 'https://github.com/merill/bluesky',
             className: 'header-github-link',
             'aria-label': 'GitHub repository',
             position: 'right',

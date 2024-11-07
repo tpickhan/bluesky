@@ -1,14 +1,14 @@
-name: Add new aka.ms link
-description: Use this form to submit an [aka.ms] link to [akaSearch.net](https://akasearch.net).
-title: "New aka.ms link"
+name: Add new Bluesky profile
+description: Use this form to submit an [bluesky.ms] link to [bluesky.ms](https://bluesky.ms).
+title: "New bluesky.ms link"
 body:
   - type: markdown
     attributes:
       value: |
-        🙏 Thank you for taking the time to submit a new aka.ms link to [akaSearch.net](https://akasearch.net)!
+        🙏 Thank you for taking the time to submit a new bluesky.ms link to [bluesky.ms](https://bluesky.ms)!
         
         A few notes:
-        * It will take a few minutes after you submit for the link to appear at [akaSearch.net](https://akasearch.net).
+        * It will take a few minutes after you submit for the link to appear at [bluesky.ms](https://bluesky.ms).
         * Avoid submitting links that are not meant for public use.
         * Submit a pull request to make advanced edits such as updating the title or deleting an entry. See [Contributing](https://github.com/merill/aka#contributing) for details.
   - type: input
@@ -25,19 +25,15 @@ body:
       label: Category (Optional. Select None to auto-select)
       description: The category will allow the link to be grouped with it's product family. To add a new category, edit [this file](https://github.com/merill/aka/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
       options:
+        - ai
         - azure
-        - azuread
-        - defender
-        - dynamics365
-        - exchange
-        - graph
-        - intune
-        - kql
-        - learn
+        - dev
+        - data
+        - dotnet
+        - businessapps
+        - general
         - microsoft365
-        - powerplatform
         - security
-        - sqlserver
-        - windows365
+        - windows
     validations:
       required: false

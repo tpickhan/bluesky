@@ -10,34 +10,37 @@ export default function Start() {
   return (
     <>
       <PageMetadata
-        title='Search aka.ms'
+        title='Search bluesky.ms'
       />
       <Layout>
         <Head>
-          <meta property="og:url" content="https://akaSearch.net" />
+          <meta property="og:url" content="https://bluesky.ms" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="Search aka.ms" />
-          <meta property="og:description" content="Use this page to search for aka.ms links that have been contributed to by the community." />
-          <meta property="og:image" content="https://akasearch.net/OpenGraphImage.png" />
-          <meta property="og:image:alt" content="Screenshot of akasearch.net home page with the text 'Crowd sourced database of aka.ms links!'" />
+          <meta property="og:title" content="Search bluesky.ms" />
+          <meta property="og:description" content="Use this page to search for the Microsoft community on bluesky.ms." />
+          <meta property="og:image" content="https://bluesky.ms/OpenGraphImage.png" />
+          <meta property="og:image:alt" content="Screenshot of bluesky.ms home page with the text 'Crowd sourced database of aka.ms links!'" />
 
           <meta name="twitter:card" content="summary_large_image" />
-          <meta property="twitter:domain" content="akasearch.net" />
+          <meta property="twitter:domain" content="bluesky.ms" />
           <meta property="twitter:site" content="@merill" />
-          <meta property="twitter:url" content="https://akasearch.net" />
-          <meta name="twitter:title" content="Search aka.ms" />
-          <meta name="twitter:description" content="Use this page to search for aka.ms links that have been contributed to by the community." />
-          <meta name="twitter:image" content="https://akasearch.net/OpenGraphImage.png" />
-          <meta property="twitter:image:alt" content="Screenshot of akasearch.net home page with the text 'Crowd sourced database of aka.ms links!'" />
+          <meta property="twitter:url" content="https://bluesky.ms" />
+          <meta name="twitter:title" content="Search bluesky.ms" />
+          <meta name="twitter:description" content="Use this page to search for the Microsoft community on bluesky.ms." />
+          <meta name="twitter:image" content="https://bluesky.ms/OpenGraphImage.png" />
+          <meta property="twitter:image:alt" content="Screenshot of bluesky.ms home page with the text 'Crowd sourced database of bluesky.ms profiles!'" />
         </Head>
 
         <main className="container margin-vert--lg">
           <div className="row">
             <div className="col col--offset-0">
               <h1 className="hero__title text-center">
-                🚀 <span className="topBannerTitleText_Ferb">→akaSearch = Search for aka.ms!</span>
+              🦋 <span className="topBannerTitleText_Ferb">→ Bluesky.ms</span>
               </h1>
-                <p className="text-center">🗣️ Do you have trouble remembering Microsoft's <a href="https://akaSearch.net">aka.ms</a> links. This community contributed list of links is for you! Use the Add button to submit new links to this list.</p>
+              <h1 className="hero__title text-center">
+              <span className="topBannerTitleText_Ferb">Follow and reconnect with the Microsoft community on Bluesky!</span>
+              </h1>
+                <p className="text-center">🗣️ Want to find your Microsoft community on Bluesky? Use this community contributed list of Bluesky profiles to find and follow ! Use the Add button to submit new profiles to this list.</p>
             </div>
             <div className="col col--offset-0">
               <CommandsTable columns={columns} data={commands} applyFilter="" />

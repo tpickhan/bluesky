@@ -5,19 +5,19 @@
 
 $filePath = $MyInvocation.MyCommand.Path
 $folderPath = Split-Path $filePath -Parent
-$configPath = $folderPath -replace "aka/build/scripts", "aka/website/config"
+$configPath = $folderPath -replace "bluesky/build/scripts", "bluesky/website/config"
 $csvFilePath = Join-Path $configPath "aka.csv"
 
 $isHttp2Supported = !($PSVersionTable.PSVersion.Major -eq 7 -and $PSVersionTable.PSVersion.Minor -eq 2) #7.2 doesn't support http2
 
 function Get-AkaCustomObject ($item) {
     $akaLink = [PSCustomObject]@{
-        link             = $item.link
-        title            = $item.title
-        autoCrawledTitle = $item.autoCrawledTitle
-        keywords         = $item.keywords
-        category         = $item.category
-        url              = $item.url
+        title    = $item.title
+        category = $item.category
+        bluesky  = $item.bluesky
+        twitter  = $item.twitter
+        type     = $item.type
+        did      = $item.did
     }
 
     return $akaLink
@@ -30,16 +30,16 @@ function Convert-AkaCsvToJson {
 
     $akaLinks = @()
 
-    foreach ($line in $csv) {   
+    foreach ($line in $csv) {
         $akaLink = Get-AkaCustomObject $line
         $akaLinks += $akaLink
-        Write-ObjectToJsonFile $akaLink
+        Write-AkaObjectToJsonFile $akaLink
     }
     Write-Host "Json files created at $configPath"
 }
 
 function Write-AkaObjectToJsonFile ($akaLink) {
-    $jsonFileName = $akaLink.link.ToLower() -replace "/", ":"
+    $jsonFileName = $akaLink.bluesky.ToLower() -replace "/", ":"
     Write-Host "Writing to $jsonFileName.json"
     $akaLink | ConvertTo-Json | Out-File (Join-Path $configPath "$($jsonFileName).json") -Encoding utf8
 }
@@ -62,85 +62,42 @@ function Get-AkaJsonsFromFolder {
 
     return $akaLinks
 }
-function Update-AkaUrls {
+function Update-MissingDids {
     $akaLinks = Get-AkaJsonsFromFolder
     foreach ($akaLink in $akaLinks) {
 
-        Write-Host "Update url: https://aka.ms/$($akaLink.link)"        
-        $longUrl = Get-AkaLongUrl $akaLink.link
-        if ($longUrl) {
-            $akaLink.url = $longUrl
-            Write-AkaObjectToJsonFile $akaLink
-        }        
-    }
-}
-
-function Get-AkaLongUrl($akaLinkName) {
-    Write-Host "Get url: https://aka.ms/$akaLinkName"
-    if($isHttp2Supported){
-        $request = Invoke-WebRequest -Uri "https://aka.ms/$akaLinkName" -Method Head -MaximumRedirection 0 -ErrorAction Ignore -SkipHttpErrorCheck -HttpVersion 2.0
-    }
-    else{
-        $request = Invoke-WebRequest -Uri "https://aka.ms/$akaLinkName" -Method Head -MaximumRedirection 0 -ErrorAction Ignore -SkipHttpErrorCheck
-    }
-    
-    $result = $null
-    if ($request.Headers.Location) {
-        $uri = $request.Headers.Location[0]
-        if ($uri -like "https://www.bing.com/?ref=aka*") {
-            Write-Host "Warning: aka.ms/$akaLinkName is not a valid aka.ms link."
-        }
-        else {
-            $result = $uri
-        }
-    }
-    return $result
-}
-
-function Get-AkaTitle($akaLinkName) {
-
-    $titlesToIgnore = @("Sign in to your account", "Microsoft Forms")
-    Write-Host "Get title: https://aka.ms/$akaLinkName"
-    if($isHttp2Supported){
-        $request = Invoke-WebRequest -Uri "https://aka.ms/$($akaLinkName)" -ErrorAction Ignore -SkipHttpErrorCheck -TimeoutSec 20 -HttpVersion 2.0
-    }
-    else{
-        $request = Invoke-WebRequest -Uri "https://aka.ms/$($akaLinkName)" -ErrorAction Ignore -SkipHttpErrorCheck -TimeoutSec 20
-    }
-    $result = ""
-    if($request -and $request.Content){
-        $content = $request.Content.ToString()
-        $start = $content.IndexOf("<title>", 0, $content.Length, [System.StringComparison]::InvariantCultureIgnoreCase)
-        
-        if ($start -ge 0) {
-            $end = $content.IndexOf("</title>", 0, $content.Length, [System.StringComparison]::InvariantCultureIgnoreCase)
-            if($end -gt $start){
-                $title = $content.Substring($start + 7, $end - $start - 7) #Get content between <title> and </title>
-                $title = $title -replace [Environment]::NewLine
-                $title = $title.Trim()
-                if(!$titlesToIgnore.Contains($title)){
-                    $result = $title
-                }
+        if([string]::IsNullOrEmpty($akaLink.did)) {
+            $did = Get-Did $akaLink.bluesky
+            if ($did) {
+                $akaLink.did = $did
+                Write-AkaObjectToJsonFile $akaLink
             }
         }
+        Write-Host "Update did: $($akaLink.bluesky)"
+    }
+}
+
+function Get-Did($blueskyHandle) {
+    $didResolveUrl = "https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=$blueskyHandle"
+    Write-Host "Get did: $didResolveUrl"
+    if ($isHttp2Supported) {
+        $request = Invoke-WebRequest -Uri $didResolveUrl -ErrorAction Ignore -SkipHttpErrorCheck -HttpVersion 2.0
+    }
+    else {
+        $request = Invoke-WebRequest -Uri $didResolveUrl -ErrorAction Ignore -SkipHttpErrorCheck
+    }
+
+    $result = $null
+    if ($request.StatusCode -eq 200) {
+        $content = $request.Content.ToString()
+        $json = ConvertFrom-Json $content
+        $result = $json.did
     }
     return $result
-}
-function Update-AkaTitle {
-    $akaLinks = Get-AkaJsonsFromFolder
-    foreach ($akaLink in $akaLinks) {
-        Write-Host "Update title: https://aka.ms/$($akaLink.link)"
-        $title = Get-AkaTitle $akaLink.link
-        if ($title) {
-            $akaLink.autoCrawledTitle = $title
-            Write-AkaObjectToJsonFile $akaLink
-        }
-    }
 }
 
 function Update-AkaAll {
-    Update-AkaUrls
-    Update-AkaTitle
+    Update-MissingDids
 }
 
 function Set-AkaGitHubAuth() {
@@ -168,15 +125,16 @@ function New-AkaLinkFromIssue {
         [Parameter(Mandatory = $false)]
         [bool]$isGitPush = $true
     )
-    if(!$issueNumber -and !$issue){
+    if (!$issueNumber -and !$issue) {
         Write-Error "Either issue or issueNumber must be specified"
     }
-    if($issueNumber){
+    if ($issueNumber) {
         Write-Host "Process Issue: $issueNumber"
         $issue = Get-GitHubIssue  -Issue $issueNumber -OwnerName merill -RepositoryName aka
     }
     $issueNumber = $issue.IssueNumber
-    if([string]::IsNullOrEmpty($issue.body) -or $issue.body.IndexOf("### Aka.ms link name") -ne 0){ #Only process new link template
+    if ([string]::IsNullOrEmpty($issue.body) -or $issue.body.IndexOf("### Aka.ms link name") -ne 0) {
+        #Only process new link template
         Write-Host "Skipping issue $($issue.IssueNumber) because it doesn't match the new link template"
     }
     else {
@@ -197,8 +155,8 @@ function New-AkaLinkFromIssue {
 
         if ($exists) {
             Write-Host "Link already exists. Skipping $link"
-            if($isUpdateGitHubIssue){
-                $message = "Thank you for submitting [aka.ms/$link](https://aka.ms/$link). Your link already exists at [akaSearch.net](https://akasearch.net). 🙏✅"
+            if ($isUpdateGitHubIssue) {
+                $message = "Thank you for submitting [aka.ms/$link](https://aka.ms/$link). Your link already exists at [bluesky.ms](https://bluesky.ms). 🙏✅"
                 New-GitHubIssueComment -OwnerName merill -RepositoryName aka -Issue $issueNumber -Body $message | Out-Null
                 Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Existing" -OwnerName merill -RepositoryName aka | Out-Null
             }
@@ -241,7 +199,7 @@ function New-AkaLinkFromIssue {
                     Update-AkaGitPush
                 }
 
-                $message = "Thank you for submitting [aka.ms/$link](https://aka.ms/$link). Your link will soon be available [akaSearch.net](https://akasearch.net). 🙏✅"
+                $message = "Thank you for submitting [aka.ms/$link](https://aka.ms/$link). Your link will soon be available [bluesky.ms](https://bluesky.ms). 🙏✅"
                 Write-Host $message
                 if ($isUpdateGitHubIssue) {
                     Write-Host "New-GitHubIssueComment"
