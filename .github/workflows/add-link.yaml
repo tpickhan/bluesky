@@ -16,7 +16,7 @@ jobs:
       issues: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Process new link request
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
