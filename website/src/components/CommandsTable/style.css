@@ -22,20 +22,20 @@
   }
 }
 
-.col-link {
-  white-space: nowrap; 
-  text-overflow:ellipsis; 
-  overflow: hidden;
-  max-width: 400px;
-  width: 20%;
-}
-
-.col-url {
+.col-bluesky {
   white-space: nowrap; 
   text-overflow:ellipsis; 
   overflow: hidden;
   max-width: 400px;
   width: 50%;
+}
+
+.col-twitter {
+  white-space: nowrap; 
+  text-overflow:ellipsis; 
+  overflow: hidden;
+  max-width: 400px;
+  width: 30%;
 }
 
 .col-title {
@@ -43,7 +43,7 @@
   text-overflow:ellipsis; 
   overflow: hidden;
   max-width: 400px;
-  width: 50%;
+  width: 40%;
 }
 
 .copyButton {

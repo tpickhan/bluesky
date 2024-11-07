@@ -40,7 +40,7 @@ export function SelectColumnFilter({
 export function handleClick (e){
   // setOpen(true);
   
-  const url = `https://aka.ms/${e.currentTarget.value}`;
+  const url = `https://bsky.app/profile/${e.currentTarget.value}`;
   navigator.clipboard.writeText(url);
 };
 
@@ -61,24 +61,7 @@ export const columns = [
       });
     },
     Cell: ({ cell: { value }, row: { original } }) => (
-      <img alt="{value}" className={`cat-${original.categoryShortName}`} />
-    ),
-  },
-  {
-    Header: "Link",
-    accessor: "link",
-    className: "commands-data-table whitespace-nowrap left col-link",
-    Cell: ({ cell: { value }, row: { original } }) => (
-      <>
-        <a
-          href={`https://aka.ms/${value}`}
-          target="blank"
-          rel="noreferrer noopener"
-        >
-          aka.ms/<b>{value}</b>
-        </a>
-        <button className="copyButton" type="button" onClick={handleClick} value={value} ><img alt={value} className={`copy`} /></button>
-      </>
+      <img alt="{value}" className={`cat-${original.type}`} />
     ),
   },
   {
@@ -86,17 +69,34 @@ export const columns = [
     accessor: "title",
     className: "commands-data-table whitespace-nowrap left col-title",
     Cell: ({ cell: { value }, row: { original } }) => (
-      <a href={`${original.url}`} target="blank" rel="noreferrer noopener">
+      <a href={`https://bsky.app/profile/${original.bluesky}`} target="blank" rel="noreferrer noopener">
         {value}
       </a>
     ),
   },
   {
-    Header: "Url",
-    accessor: "url",
-    className: "commands-data-table left col-url",
+    Header: "Bluesky",
+    accessor: "bluesky",
+    className: "commands-data-table whitespace-nowrap left col-bluesky",
     Cell: ({ cell: { value }, row: { original } }) => (
-      <a href={value} target="blank" rel="noreferrer noopener">
+      <>
+        <a
+          href={`https://bsky.app/profile/${value}`}
+          target="blank"
+          rel="noreferrer noopener"
+        >
+          <b>{value}</b>
+        </a>
+        <button className="copyButton" type="button" onClick={handleClick} value={value} ><img alt={value} className={`copy`} /></button>
+      </>
+    ),
+  },
+  {
+    Header: "Twitter",
+    accessor: "twitter",
+    className: "commands-data-table left col-twitter",
+    Cell: ({ cell: { value }, row: { original } }) => (
+      <a href={`https://x.com/${value}`} target="blank" rel="noreferrer noopener">
         {value}
       </a>
     ),

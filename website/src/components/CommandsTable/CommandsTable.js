@@ -176,7 +176,7 @@ function GlobalFilter({
           placeholder={`Search links...`}
         />
       </label>
-      <Link className="button button--info addbutton" to="https://github.com/merill/aka/issues/new?assignees=&labels=&template=add-link.yaml&title=New+aka.ms+link+"><span class="addShort">✚</span><span class="addLong"> Add aka.ms link</span></Link>
+      <Link className="button button--info addbutton" to="https://github.com/merill/bluesky/issues/new?assignees=&labels=&template=add-link.yaml&title=New+Bluesky+user"><span class="addShort">✚</span><span class="addLong"> Add Bluesky user</span></Link>
     </>
   );
 }

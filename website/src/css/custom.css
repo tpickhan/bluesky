@@ -184,3 +184,7 @@ li>a.menu__link {
 .cat-general {
   content: url('/static/img/general.svg');
 }
+
+.cat-mvp {
+  content: url('/static/img/mvp.svg');
+}
