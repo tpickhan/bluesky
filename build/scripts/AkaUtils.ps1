@@ -134,8 +134,8 @@ function New-AkaLinkFromIssue {
         $issue = Get-GitHubIssue  -Issue $issueNumber -OwnerName merill -RepositoryName bluesky
     }
     $issueNumber = $issue.IssueNumber
-    Write-Host $issue.body
-    if ([string]::IsNullOrEmpty($issue.body) -or $issue.body.IndexOf("### Bluesky profile url") -eq 0) {
+
+    if ([string]::IsNullOrEmpty($issue.body) -or $issue.body.IndexOf("### Bluesky profile url") -eq -1) {
         #Only process new item template
         Write-Host "Skipping issue $($issue.IssueNumber) because it doesn't match the new link template"
     }
