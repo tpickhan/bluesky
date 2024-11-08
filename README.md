@@ -34,8 +34,8 @@ Some conventions to follow when creating a pull request using this method.
 * The file name should be lower case.
 * Contents in the file should be in this format.
   * **title** - The name as shown in the Bluesky profile. e.g. Merill Fernando
-  * **bluesky** - The url of the Bluesky profile url. e.g. https://bsky.app/profile/merill.net
-  * **twitter** - Optional. Twitter profile of this Bluesky user. Helps folks migrating from Twitter to Bluesky to find the folks they were following previously.
+  * **bluesky** - The Bluesky handle (do not include full url). e.g. **merill.net** (where the profile url is https://bsky.app/profile/**merill.net**)
+  * **twitter** - Optional. Twitter handle (do not include full url) of this Bluesky user. Helps folks migrating from Twitter to Bluesky to find the folks they were following previously.
   * **type** - Optional. Specify if the profile belongs to a Microsoft employee or an MVP, otherwise leave blank. Supported values are: microsoft, mvp
   * **category** - Optional. Choose the most appropriate topic or product the Bluesky user is known for or leave empty if a specific category is not applicable. 
     * New categories can be added (check the dropdown on the site for the list of existing categories). Avoid adding alternate names for existing categories.
