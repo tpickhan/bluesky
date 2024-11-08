@@ -1,12 +1,15 @@
 name: Add new Bluesky profile
-description: Use this form to submit a Bluesky profile [bluesky.ms](https://bluesky.ms).
+description: Use this form to submit a Bluesky profile to bluesky.ms so we can discover each other easily.
 title: "Add Bluesky Profile"
 body:
   - type: markdown
     attributes:
       value: |
-        🙏 Thank you for taking the time to submit a new Bluesky profile to [bluesky.ms](https://bluesky.ms)!
+        🙏 Thank you for taking the time to submit a new Bluesky profile to the [bluesky.ms](https://bluesky.ms) crowd sourced database!
         
+        We welcome all types of Bluesky profiles to this database related to the Microsoft community. From Microsoft IT admins, devs to MVPs and Microsoft employees.
+        Let's make it easier to find and follow each other so we can share, learn and grow as a community.
+
         A few notes:
         * It will take a few minutes after you submit for the profile to appear on [bluesky.ms](https://bluesky.ms).
         * Submit a pull request to make advanced edits such as updating the title or deleting an entry. See [Contributing](https://github.com/merill/bluesky#contributing) for details.
