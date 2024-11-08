@@ -45,11 +45,11 @@ Some conventions to follow when creating a pull request using this method.
 
 ```json
 {
-  "title": "Merill Fernando",
-  "category": "security",
-  "bluesky": "merill.net",
-  "twitter": "merill",
-  "type": "microsoft",
+  "title": "John Doe",
+  "category": "m365",
+  "bluesky": "johndoe.bsky.social",
+  "twitter": "johndoe",
+  "type": ""
 }
 ```
 ### Reporting Issues
