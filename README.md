@@ -36,10 +36,10 @@ Some conventions to follow when creating a pull request using this method.
   * **title** - The name as shown in the Bluesky profile. e.g. Merill Fernando
   * **bluesky** - The Bluesky handle (do not include full url). e.g. **merill.net** (where the profile url is https://bsky.app/profile/**merill.net**)
   * **twitter** - Optional. Twitter handle (do not include full url) of this Bluesky user. Helps folks migrating from Twitter to Bluesky to find the folks they were following previously.
-  * **type** - Optional. Specify if the profile belongs to a Microsoft employee or an MVP, otherwise leave blank. Supported values are: microsoft, mvp
   * **category** - Optional. Choose the most appropriate topic or product the Bluesky user is known for or leave empty if a specific category is not applicable. 
     * New categories can be added (check the dropdown on the site for the list of existing categories). Avoid adding alternate names for existing categories.
     * When adding a new category, update the [Add bluesky.ms issue template](https://github.com/merill/bluesky/blob/main/.github/ISSUE_TEMPLATE/add-link.yaml) to include the new category.
+* **type** - Optional. Specify if the profile belongs to a Microsoft employee or an MVP, otherwise leave blank. Supported values are: microsoft, mvp
 
 ##### Sample json
 
