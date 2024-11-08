@@ -19,7 +19,7 @@ export default function Start() {
           <meta property="og:title" content="Search bluesky.ms" />
           <meta property="og:description" content="Use this page to search for the Microsoft community on bluesky.ms." />
           <meta property="og:image" content="https://bluesky.ms/OpenGraphImage.png" />
-          <meta property="og:image:alt" content="Screenshot of bluesky.ms home page with the text 'Crowd sourced database of aka.ms links!'" />
+          <meta property="og:image:alt" content="Screenshot of bluesky.ms home page with the text 'Crowd sourced database of Bluesky profiles!'" />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="twitter:domain" content="bluesky.ms" />
@@ -37,10 +37,12 @@ export default function Start() {
               <h1 className="hero__title text-center">
               🦋 <span className="topBannerTitleText_Ferb">→ Bluesky.ms</span>
               </h1>
-              <h1 className="hero__title text-center">
+              <h1 className="title text-center">
               <span className="topBannerTitleText_Ferb">Follow and reconnect with the Microsoft community on Bluesky!</span>
               </h1>
-                <p className="text-center">🗣️ Want to find your Microsoft community on Bluesky? Use this community contributed list of Bluesky profiles to find and follow ! Use the Add button to submit new profiles to this list.</p>
+                <p className="text-center">🗣️ Want to find your Microsoft community on Bluesky? Use this community contributed list of Bluesky profiles to find and follow!</p>
+                  
+                <p className="text-center">Use the Add button below to submit new profiles to this list. Don't have a Bluesky account? Sign up at <a href='https://bsky.app/'>bsky.app</a></p>
             </div>
             <div className="col col--offset-0">
               <CommandsTable columns={columns} data={commands} applyFilter="" />

@@ -32,7 +32,7 @@ export default function NotFound() {
                   id="theme.NotFound.p1"
                   description="The first paragraph of the 404 page"
                 >
-                  Use the table below to look up aka.ms links.
+                  Use the table below to look up Bluesky profiles.
                 </Translate>
               </p>
             </div>

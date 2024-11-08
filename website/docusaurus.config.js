@@ -63,8 +63,16 @@ const config = {
             label: 'cmd.ms'
           },
           {
+            href: 'https://entra.news',
+            label: 'entra.news'
+          },
+          {
             href: 'https://merill.net',
             label: 'merill.net',
+          },
+          {
+            href: 'https://mc.merill.net',
+            label: 'mc.merill.net',
           },
           {
             href: '/about',
@@ -77,12 +85,6 @@ const config = {
             'aria-label': 'GitHub repository',
             position: 'right',
           },
-          {
-            href: 'https://twitter.com/merill',
-            className: 'header-twitter-link',
-            'aria-label': 'Twitter',
-            position: 'right',
-          }
         ],
       },
       footer: {
@@ -114,12 +116,12 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: 'https://merill.net',
+                label: 'Bluesky',
+                to: 'https://bsky.app/profile/merill.net',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/merill',
+                label: 'LinkedIn',
+                to: 'https://www.linkedin.com/in/merill/',
               },
             ],
           },

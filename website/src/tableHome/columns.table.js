@@ -65,7 +65,7 @@ export const columns = [
     ),
   },
   {
-    Header: "Title",
+    Header: "Name",
     accessor: "title",
     className: "commands-data-table whitespace-nowrap left col-title",
     Cell: ({ cell: { value }, row: { original } }) => (

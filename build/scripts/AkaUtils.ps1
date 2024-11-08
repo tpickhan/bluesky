@@ -179,7 +179,7 @@ function New-AkaLinkFromIssue {
                     Write-Host $message
                     Write-Host "New-GitHubIssueComment"
                     New-GitHubIssueComment -OwnerName merill -RepositoryName bluesky -Issue $issueNumber -Body $message | Out-Null
-                    Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Invalid aka.ms link" -OwnerName merill -RepositoryName bluesky | Out-Null
+                    Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Invalid Bluesky url" -OwnerName merill -RepositoryName bluesky | Out-Null
                 }
             }
             else {
