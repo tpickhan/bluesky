@@ -46,9 +46,9 @@ Some conventions to follow when creating a pull request using this method.
 ```json
 {
   "title": "John Doe",
-  "category": "m365",
   "bluesky": "johndoe.bsky.social",
   "twitter": "johndoe",
+  "category": "m365",
   "type": ""
 }
 ```
