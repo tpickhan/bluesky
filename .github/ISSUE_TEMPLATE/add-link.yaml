@@ -31,14 +31,14 @@ body:
     attributes:
       label: Twitter username
       description: Helps Twitter users migrating to Bluesky to find map Feel free to omit the https://x.com part of the url. E.g. https://bsky.app/profile/john.bsky.social → john.bsky.social
-      placeholder: ex. john.bsky.social or merill.net
+      placeholder: ex. merill
     validations:
       required: false
   - type: dropdown
     id: category
     attributes:
       label: Category
-      description: Choose the most appropriate category for this profile or choose 'general' if a specific category is not applicable. To add a new category, edit [this file](https://github.com/merill/bluesky/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
+      description: Choose the most appropriate topic or product the Bluesky profile is known for or choose `None` if a specific category is not applicable. To add a new category, edit [this file](https://github.com/merill/bluesky/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
       options:
         - ai
         - azure
@@ -46,12 +46,11 @@ body:
         - data
         - dotnet
         - businessapps
-        - general
         - microsoft365
         - security
         - windows
     validations:
-      required: true
+      required: false
   - type: dropdown
     id: typ
     attributes:
