@@ -1,29 +1,44 @@
 name: Add new Bluesky profile
-description: Use this form to submit an [bluesky.ms] link to [bluesky.ms](https://bluesky.ms).
-title: "New bluesky.ms link"
+description: Use this form to submit a Bluesky profile [bluesky.ms](https://bluesky.ms).
+title: "Add Bluesky Profile"
 body:
   - type: markdown
     attributes:
       value: |
-        🙏 Thank you for taking the time to submit a new bluesky.ms link to [bluesky.ms](https://bluesky.ms)!
+        🙏 Thank you for taking the time to submit a new Bluesky profile to [bluesky.ms](https://bluesky.ms)!
         
         A few notes:
-        * It will take a few minutes after you submit for the link to appear at [bluesky.ms](https://bluesky.ms).
-        * Avoid submitting links that are not meant for public use.
-        * Submit a pull request to make advanced edits such as updating the title or deleting an entry. See [Contributing](https://github.com/merill/aka#contributing) for details.
+        * It will take a few minutes after you submit for the profile to appear on [bluesky.ms](https://bluesky.ms).
+        * Submit a pull request to make advanced edits such as updating the title or deleting an entry. See [Contributing](https://github.com/merill/bluesky#contributing) for details.
   - type: input
-    id: link
+    id: title
     attributes:
-      label: Aka.ms link name
-      description: Feel free to omit the aka.ms part of the url. E.g. https://aka.ms/intune → intune
-      placeholder: ex. intune
+      label: Title
+      description: The name of the Bluesky profile
+      placeholder: ex. Merill Fernando
     validations:
       required: true
+  - type: input
+    id: bluesky
+    attributes:
+      label: Bluesky profile name
+      description: Feel free to omit the https://bsky.app/profile/ part of the url. E.g. https://bsky.app/profile/john.bsky.social → john.bsky.social
+      placeholder: ex. john.bsky.social or merill.net
+    validations:
+      required: true
+  - type: input
+    id: twitter
+    attributes:
+      label: Twitter username
+      description: Helps Twitter users migrating to Bluesky to find map Feel free to omit the https://x.com part of the url. E.g. https://bsky.app/profile/john.bsky.social → john.bsky.social
+      placeholder: ex. john.bsky.social or merill.net
+    validations:
+      required: false
   - type: dropdown
     id: category
     attributes:
-      label: Category (Optional. Select None to auto-select)
-      description: The category will allow the link to be grouped with it's product family. To add a new category, edit [this file](https://github.com/merill/aka/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
+      label: Category
+      description: Choose the most appropriate category for this profile or choose 'general' if a specific category is not applicable. To add a new category, edit [this file](https://github.com/merill/bluesky/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
       options:
         - ai
         - azure
@@ -35,5 +50,15 @@ body:
         - microsoft365
         - security
         - windows
+    validations:
+      required: true
+  - type: dropdown
+    id: typ
+    attributes:
+      label: Type
+      description: Does this profile belong to a Microsoft employee or MVP?
+      options:
+        - microsoft
+        - mvp
     validations:
       required: false
