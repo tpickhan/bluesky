@@ -50,6 +50,7 @@ body:
         - data
         - dotnet
         - businessapps
+        - intune
         - microsoft365
         - security
         - windows
