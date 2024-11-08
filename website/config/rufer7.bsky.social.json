@@ -1,6 +1,8 @@
 {
-  "url": "rufer7.bsky.social",
-  "name" "Marc Rufer",
+  "title": "Marc Rufer",
+  "category": "dev",
+  "bluesky": "rufer7.bsky.social",
+  "twitter": "",
   "type": "mvp",
-  "category": "dev"
+  "did": ""
 }
