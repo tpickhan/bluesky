@@ -166,14 +166,13 @@ function GlobalFilter({
         <span></span>
         <input
           type="text"
-          autoFocus
           className="mt-1 block w-full rounded-md border-gray-300  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-zinc-800 dark:border-gray-700 searchbox"
           value={value || ""}
           onChange={(e) => {
             setValue(e.target.value);
             onChange(e.target.value);
           }}
-          placeholder={`Search links...`}
+          placeholder={`Search...`}
         />
       </label>
       <Link className="button button--info addbutton" to="https://github.com/merill/bluesky/issues/new?assignees=&labels=&template=add-link.yaml&title=New+Bluesky+user"><span class="addShort">✚</span><span class="addLong"> Add Bluesky user</span></Link>
