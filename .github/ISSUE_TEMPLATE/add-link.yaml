@@ -42,7 +42,7 @@ body:
     id: category
     attributes:
       label: Category
-      description: Choose the most appropriate topic or product the Bluesky profile is known for or choose `None` if a specific category is not applicable. To add a new category, edit [this file](https://github.com/merill/bluesky/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
+      description: Choose the most appropriate topic or product the Bluesky user is known for or choose `None` if a specific category is not applicable. To add a new category, edit [this file](https://github.com/merill/bluesky/edit/main/.github/ISSUE_TEMPLATE/add-link.yaml) and submit a pull request.
       options:
         - ai
         - azure
