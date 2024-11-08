@@ -32,15 +32,26 @@ Some conventions to follow when creating a pull request using this method.
 | https://bsky.app/profile/john.bsky.social | john.bsky.social.json |
 
 * The file name should be lower case.
-* Contents in the file
-  * **url** - The full url to the profile. e.g. https://bsky.app/profile/merill.net
-  * **name** - The name of the person. e.g. Merill Fernando
-  * **type** - Optional. Specify if the profile belongs to a Microsoft employee or an MVP, otherwise leave blank. Supported values are: microsoft, mvp
-  * **category** - The Microsoft product, service or group this profile is associated with. This is used to group products together on the site.
+* Contents in the file should be in this format.
+  * **title** - The name as shown in the Bluesky profile. e.g. Merill Fernando
+  * **bluesky** - The Bluesky handle (do not include full url). e.g. **merill.net** (where the profile url is https://bsky.app/profile/**merill.net**)
+  * **twitter** - Optional. Twitter handle (do not include full url) of this Bluesky user. Helps folks migrating from Twitter to Bluesky to find the folks they were following previously.
+  * **category** - Optional. Choose the most appropriate topic or product the Bluesky user is known for or leave empty if a specific category is not applicable. 
     * New categories can be added (check the dropdown on the site for the list of existing categories). Avoid adding alternate names for existing categories.
-    * When adding a new category, update the [Add bluesky.ms issue template](https://github.com/merill/bluesky/blob/main/.github/ISSUE_TEMPLATE/add-profile.yaml) to include the new category.
-    * If you wish to go the extra mile you can also add an icon for the category at [/static/img/](https://github.com/merill/bluesky/tree/main/website/static/img). This is optional, a default icon will be used if a custom one is not provided.
+    * When adding a new category, update the [Add bluesky.ms issue template](https://github.com/merill/bluesky/blob/main/.github/ISSUE_TEMPLATE/add-link.yaml) to include the new category.
+* **type** - Optional. Specify if the profile belongs to a Microsoft employee or an MVP, otherwise leave blank. Supported values are: microsoft, mvp
 
+##### Sample json
+
+```json
+{
+  "title": "John Doe",
+  "bluesky": "johndoe.bsky.social",
+  "twitter": "johndoe",
+  "category": "m365",
+  "type": ""
+}
+```
 ### Reporting Issues
 
 Open a [new bug](https://github.com/merill/bluesky/issues/new?assignees=&labels=&template=add-bug.yaml&title=%5BBug%5D) to report issues.
