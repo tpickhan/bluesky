@@ -11,30 +11,31 @@ body:
         Let's make it easier to find and follow each other so we can share, learn and grow as a community.
 
         A few notes:
+        * You are welcome to submit your profile and the profile of others you know.
         * It will take a few minutes after you submit for the profile to appear on [bluesky.ms](https://bluesky.ms).
         * Submit a pull request to make advanced edits such as updating the title or deleting an entry. See [Contributing](https://github.com/merill/bluesky#contributing) for details.
   - type: input
     id: title
     attributes:
       label: Title
-      description: The name of the Bluesky profile
+      description: The name as shown in the Bluesky profile
       placeholder: ex. Merill Fernando
     validations:
       required: true
   - type: input
     id: bluesky
     attributes:
-      label: Bluesky profile name
-      description: Feel free to omit the https://bsky.app/profile/ part of the url. E.g. https://bsky.app/profile/john.bsky.social → john.bsky.social
-      placeholder: ex. john.bsky.social or merill.net
+      label: Bluesky profile url
+      description: To find your url browse to your profile in the Bluesky app, select `...` → `Share` and copy the url. If you are submitting for another person, click their profile and copy the url from their profile page.
+      placeholder: ex. https://bsky.app/profile/john.bsky.social
     validations:
       required: true
   - type: input
     id: twitter
     attributes:
-      label: Twitter username
-      description: Helps Twitter users migrating to Bluesky to find map Feel free to omit the https://x.com part of the url. E.g. https://bsky.app/profile/john.bsky.social → john.bsky.social
-      placeholder: ex. merill
+      label: Twitter profile (url or username)
+      description: Twitter profile of this Bluesky user. Helps folks migrating from Twitter to Bluesky to find the folks they were following previously.
+      placeholder: ex. merill or https://x.com/merill
     validations:
       required: false
   - type: dropdown
