@@ -78,6 +78,7 @@ function Update-MissingDids {
 }
 
 function Get-Did($blueskyHandle) {
+
     $didResolveUrl = "https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=$blueskyHandle"
     Write-Host "Get did: $didResolveUrl"
     if ($isHttp2Supported) {
@@ -130,67 +131,70 @@ function New-AkaLinkFromIssue {
     }
     if ($issueNumber) {
         Write-Host "Process Issue: $issueNumber"
-        $issue = Get-GitHubIssue  -Issue $issueNumber -OwnerName merill -RepositoryName aka
+        $issue = Get-GitHubIssue  -Issue $issueNumber -OwnerName merill -RepositoryName bluesky
     }
     $issueNumber = $issue.IssueNumber
-    if ([string]::IsNullOrEmpty($issue.body) -or $issue.body.IndexOf("### Aka.ms link name") -ne 0) {
-        #Only process new link template
+    Write-Host $issue.body
+    if ([string]::IsNullOrEmpty($issue.body) -or $issue.body.IndexOf("### Bluesky profile url") -eq 0) {
+        #Only process new item template
         Write-Host "Skipping issue $($issue.IssueNumber) because it doesn't match the new link template"
     }
     else {
         $lines = $issue.body.Split([Environment]::NewLine)
 
-        $link = $lines[2]
-        $category = $lines[6]
+        $title = $lines[2]
+        $bluesky = $lines[6]
+        $twitter = $lines[10]
+        $category = $lines[14]
+        $type = $lines[18]
         if ($category -eq "None") {
             $category = $null
         }
+        if ($type -eq "None") {
+            $category = $null
+        }
 
-        $link = $link -replace "https://aka.ms/", ""
-        $link = $link -replace "http://aka.ms/", ""
-        $link = $link -replace "aka.ms/", ""
-        $link = $link.Trim()
+        $twitter = Get-CleanProfileName -url $twitter -prefix 'https://twitter.com/'
+        $twitter = Get-CleanProfileName -url $twitter -prefix 'https://x.com/'
 
-        $exists = Test-Path (Join-Path $configPath "$($link).json")
+        $blueSky = Get-CleanProfileName -url $bluesky -prefix 'https://bsky.app/profile/'
+
+        $exists = Test-Path (Join-Path $configPath "$($bluesky).json")
 
         if ($exists) {
-            Write-Host "Link already exists. Skipping $link"
+            Write-Host "Profile already exists. Skipping $bluesky"
             if ($isUpdateGitHubIssue) {
-                $message = "Thank you for submitting [aka.ms/$link](https://aka.ms/$link). Your link already exists at [bluesky.ms](https://bluesky.ms). 🙏✅"
-                New-GitHubIssueComment -OwnerName merill -RepositoryName aka -Issue $issueNumber -Body $message | Out-Null
-                Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Existing" -OwnerName merill -RepositoryName aka | Out-Null
+                $message = "Thank you for submitting https://bsky.app/profile/$bluesky. This profile already exists in the [bluesky.ms](https://bluesky.ms) database. 🙏✅"
+                New-GitHubIssueComment -OwnerName merill -RepositoryName bluesky -Issue $issueNumber -Body $message | Out-Null
+                Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Existing" -OwnerName merill -RepositoryName bluesky | Out-Null
             }
         }
         else {
-            $longUrl = Get-AkaLongUrl $link
+            $did = Get-Did $bluesky
 
-            if ([string]::IsNullOrEmpty($link) -or !$longUrl) {
-                #Skip download it hangs the process
-                Write-Host "Invalid link: $link"
+            if ($null -eq $did) {
+                Write-Host "Invalid bluesky handle: $bluesky"
                 if ($isUpdateGitHubIssue) {
-                    $message = "Thank you for submitting an aka.ms link. Unfortunately the link [https://aka.ms/$link](https://aka.ms/$link) is not a valid aka.ms link. If you believe this is a mistake, it could be a problem with the automated script. Please reach out to me at https://twitter.com/merill and let me know. Thanks!"
+                    $message = "Thank you for submitting https://bsky.app/profile/$bluesky. Unfortunately the link is not a valid Bluesky link. If this is an error, please try submitting the form again. If it is not resolved please reach out to me at https://bsky.app/profile/merill.net and let me know. Thanks!"
                     Write-Host $message
                     Write-Host "New-GitHubIssueComment"
-                    New-GitHubIssueComment -OwnerName merill -RepositoryName aka -Issue $issueNumber -Body $message | Out-Null
-                    Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Invalid aka.ms link" -OwnerName merill -RepositoryName aka | Out-Null
+                    New-GitHubIssueComment -OwnerName merill -RepositoryName bluesky -Issue $issueNumber -Body $message | Out-Null
+                    Update-GitHubIssue -Issue $issueNumber -State Closed -Label "Invalid aka.ms link" -OwnerName merill -RepositoryName bluesky | Out-Null
                 }
             }
             else {
-
-                $autoCrawledTitle = Get-AkaTitle $link
 
                 ## Default to new object and update if it exists
                 $akaLink = Get-AkaCustomObject $newItem
 
                 $state = "Added"
-                if ($exists) {
-                    $akaLink = Get-Content (Join-Path $configPath "$($link).json") | Out-String | ConvertFrom-Json
-                    $state = "Updated"
-                }
-                $akaLink.link = $link
-                $akaLink.autoCrawledTitle = $autoCrawledTitle
+
+                $akaLink.title = $title
+                $akaLink.bluesky = $bluesky
+                $akaLink.twitter = $twitter
                 $akaLink.category = $category
-                $akaLink.url = $longUrl
+                $akaLink.type = $type
+                $akaLink.did = $did
 
                 Write-AkaObjectToJsonFile $akaLink
 
@@ -199,22 +203,32 @@ function New-AkaLinkFromIssue {
                     Update-AkaGitPush
                 }
 
-                $message = "Thank you for submitting [aka.ms/$link](https://aka.ms/$link). Your link will soon be available [bluesky.ms](https://bluesky.ms). 🙏✅"
+                $message = "Thank you for submitting https://bsky.app/profile/$bluesky. This profile will soon be available in the [bluesky.ms](https://bluesky.ms) database. 🙏✅"
                 Write-Host $message
                 if ($isUpdateGitHubIssue) {
                     Write-Host "New-GitHubIssueComment"
-                    New-GitHubIssueComment -OwnerName merill -RepositoryName aka -Issue $issueNumber -Body $message | Out-Null
-                    Update-GitHubIssue -Issue $issueNumber -State Closed -Label $state -OwnerName merill -RepositoryName aka | Out-Null
+                    New-GitHubIssueComment -OwnerName merill -RepositoryName bluesky -Issue $issueNumber -Body $message | Out-Null
+                    Update-GitHubIssue -Issue $issueNumber -State Closed -Label $state -OwnerName merill -RepositoryName bluesky | Out-Null
                 }
             }
         }
     }
 }
 
+function Get-CleanProfileName($url, $prefix) {
+    $profileName = $url -replace $prefix, ""
+    # Remove any trailing slashes
+    $profileName = $profileName -replace "/$", ""
+
+    $profileName = $profileName.Trim()
+    $profileName = $profileName.ToLower()
+    return $profileName
+}
+
 # Get's all the open issues and processed them
 function Update-AllOpenGitHubIssues() {
 
-    $issues = Get-GitHubIssue -OwnerName merill -RepositoryName aka -State Open
+    $issues = Get-GitHubIssue -OwnerName merill -RepositoryName bluesky -State Open
     Write-Host "Found $($issues.Count) open issues"
     foreach ($issue in $issues) {
         New-AkaLinkFromIssue -issue $issue -isUpdateGitHubIssue $true -isGitPush $true
@@ -225,7 +239,7 @@ function Update-AllOpenGitHubIssues() {
 # Useful to reprocess any entries that might not have been updated to GitHub.
 function Update-ReprocessAllGitHubIssuesLocal() {
 
-    $issues = Get-GitHubIssue -OwnerName merill -RepositoryName aka -State Closed
+    $issues = Get-GitHubIssue -OwnerName merill -RepositoryName bluesky -State Closed
     Write-Host "Found $($issues.Count) open issues"
     foreach ($issue in $issues) {
         New-AkaLinkFromIssue -issue $issue -isUpdateGitHubIssue $false -isGitPush $false
