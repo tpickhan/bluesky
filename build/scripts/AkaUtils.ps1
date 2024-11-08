@@ -153,13 +153,17 @@ function New-AkaLinkFromIssue {
         if ($type -eq "None") {
             $category = $null
         }
+        if($twitter -eq "_No response_") {
+            $twitter = $null
+        }
 
         $twitter = Get-CleanProfileName -url $twitter -prefix 'https://twitter.com/'
         $twitter = Get-CleanProfileName -url $twitter -prefix 'https://x.com/'
 
         $blueSky = Get-CleanProfileName -url $bluesky -prefix 'https://bsky.app/profile/'
 
-        $exists = Test-Path (Join-Path $configPath "$($bluesky).json")
+        $exists = $false # Let's allow updates for now
+        # $exists = Test-Path (Join-Path $configPath "$($bluesky).json")
 
         if ($exists) {
             Write-Host "Profile already exists. Skipping $bluesky"
