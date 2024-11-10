@@ -19,3 +19,4 @@ Feel free to create your own starter pack and submit a pull request to add it to
 * [Microsoft Cloud Security and Identity](https://bsky.app/starter-pack/jeftek.com/3l6xljuyq2x2j)
 * [Xbox Essentials Starter Pack](https://bsky.app/starter-pack/deadly-headley.bsky.social/3l7fctgd7gw2h)
 * [SQL People #1](https://bsky.app/starter-pack-short/PxShiuH) + [SQL People #2](https://bsky.app/starter-pack-short/FuwcAQA)
+* [Microsoft Exchane](https://bsky.app/starter-pack/did:plc:74bru4qbu5fs24pqj64whhsw/3la7wxdjs6o2s)
