@@ -7,9 +7,11 @@ hide_table_of_contents: true
 
 ## Tips
 
+Thanks to Jef Kazimer for the initial list of tips. [BlueSky Guide](https://github.com/JefTek/BlueskyGuide/tree/main)
+
 ### Custom Domains
 
-- [How to ser your domain as your handle](https://bsky.social/about/blog/4-28-2023-domain-handle-tutorial) - A guide on using a custom domain as your Bluesky handle
+- [How to set your domain as your handle](https://bsky.social/about/blog/4-28-2023-domain-handle-tutorial) - A guide on using a custom domain as your Bluesky handle
 
 ## Tools
 
