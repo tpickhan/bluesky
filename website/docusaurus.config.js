@@ -63,6 +63,10 @@ const config = {
             label: 'Starter Packs',
           },
           {
+            href: '/tips',
+            label: 'Tips',
+          },
+          {
             href: '/about',
             label: 'About',
           },

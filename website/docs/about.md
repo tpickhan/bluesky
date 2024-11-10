@@ -1,23 +1,19 @@
 ---
-sidebar_position: 1
-title: 🖥 About
+sidebar_position: 4
+title: 🖥 About Bluesky.ms
 slug: /about
 hide_table_of_contents: true
-custom_edit_url: null
-pagination_next: null
-pagination_prev: null
 ---
 
 # 🦋 About Bluesky.ms
 
 Bluesky.ms is a crowd sourced database of the Microsoft community on Bluesky.
 
-
 ## 🙋🏽‍♀️ Frequently asked questions?
 
 ### 👨🏽‍🦲 Who built this?
 
-This page is an open source project built by [Merill Fernando](https://merill.net) and Product Manager at Microsoft. The source code is available at [github.com/merill/bluesky](https://github.com/merill/bluesky)
+This site is an open source project built by [Merill Fernando](https://merill.net) and Product Manager at Microsoft. The source code is available at [github.com/merill/bluesky](https://github.com/merill/bluesky)
 
 ### ✍️ How can I contribute?
 

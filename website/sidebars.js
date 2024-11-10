@@ -21,6 +21,7 @@ const sidebars = {
       href: '/',
     },
     'starterpacks',
+    'tips',
     'about'
   ]
 };
