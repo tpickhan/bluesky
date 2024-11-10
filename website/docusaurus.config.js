@@ -59,24 +59,27 @@ const config = {
         },
         items: [
           {
-            href: 'https://cmd.ms',
-            label: 'cmd.ms'
-          },
-          {
-            href: 'https://entra.news',
-            label: 'entra.news'
-          },
-          {
-            href: 'https://merill.net',
-            label: 'merill.net',
-          },
-          {
-            href: 'https://mc.merill.net',
-            label: 'mc.merill.net',
+            href: '/starterpacks',
+            label: 'Starter Packs',
           },
           {
             href: '/about',
             label: 'About',
+          },
+
+          {
+            href: 'https://cmd.ms',
+            label: 'cmd.ms',
+            position: 'right',
+          },
+          {
+            href: 'https://entra.news',
+            label: 'entra.news',
+            position: 'right',
+          },
+          {
+            href: 'https://merill.net',
+            label: 'merill.net',
             position: 'right',
           },
           {
